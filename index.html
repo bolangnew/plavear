@@ -19,7 +19,7 @@
     <!-- Add the GIF as an asset -->
     <video id="plave" loop="true" autoplay  playsinline webkit-playsinline crossorigin="anonymous" muted="true"
     src="vid1.mp4"></video>
-    <audio id="song" loop="true" autoplay crossorigin="anonymous" preload="auto" src="https://cdn.glitch.global/9ad62917-d66a-4d3c-aed7-76c49e80d745/Happy_birthday_english(chosic.com).mp3?v=1693622538319"></audio>
+    <audio id="song" loop="true" autoplay crossorigin="anonymous" preload="auto" src="songar.mp3"></audio>
   </a-assets>
 
   <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -37,19 +37,15 @@
  window.addEventListener('targetFound', function () {
     // Get video element by id
     var videoElement = document.getElementById("plave");
-    
-    // Play the video
     videoElement.play();
+    var audio = document.getElementById("song");
+    audio.play();
   });
-//  AFRAME.registerComponent('soundhandler', {
-//   tick: function () {
-//    var entity = document.querySelector('[sound]');
-//    if (document.querySelector('a-video').object3D.visible == true) {
-//     entity.components.sound.playSound();
-//   } else {
-//     entity.components.sound.pauseSound();
-//   }
-// }
-// });
+
+// detect target lost
+window.addEventListener("targetLost", event => {
+  var audio = document.getElementById("song");
+  audio.pause();
+});
 </script>
 </html>
