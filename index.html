@@ -1,0 +1,55 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <!-- Include A-Frame and MindAR libraries -->
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+  
+  <script src="https://unpkg.com/aframe-chromakey-material/dist/aframe-chromakey-material.min.js"></script>
+</head>
+
+<body>
+  <a-scene
+  mindar-image="imageTargetSrc:targets.mind; uiScanning:no"
+  color-space="sRGB" renderer="colorManagement: true,
+  physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+  <a-assets>
+    <!-- Add the GIF as an asset -->
+    <video id="plave" loop="true" autoplay  playsinline webkit-playsinline crossorigin="anonymous" muted="true"
+    src="vid1.mp4"></video>
+    <audio id="song" loop="true" autoplay crossorigin="anonymous" preload="auto" src="https://cdn.glitch.global/9ad62917-d66a-4d3c-aed7-76c49e80d745/Happy_birthday_english(chosic.com).mp3?v=1693622538319"></audio>
+  </a-assets>
+
+  <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+  <a-entity mindar-image-target="targetIndex: 0">
+    <a-video shader="chromakey" color="0.1 0.9 0.2" src="#plave" width="1" height="1.5" position="0 0 0"></a-video>
+    <!-- <a-video shader="chromakey" color="#134dbf" src="#Bunny" muted autoplay loop playsinline crossorigin="anonymous"  width="1" height="1.5" position="0 0 0"></a-video> -->
+  </a-entity>
+  <a-entity sound="src: #song" autoplay="false"></a-entity>
+</a-scene>
+
+</body>
+
+<script type="text/javascript">
+ window.addEventListener('targetFound', function () {
+    // Get video element by id
+    var videoElement = document.getElementById("plave");
+    
+    // Play the video
+    videoElement.play();
+  });
+//  AFRAME.registerComponent('soundhandler', {
+//   tick: function () {
+//    var entity = document.querySelector('[sound]');
+//    if (document.querySelector('a-video').object3D.visible == true) {
+//     entity.components.sound.playSound();
+//   } else {
+//     entity.components.sound.pauseSound();
+//   }
+// }
+// });
+</script>
+</html>
